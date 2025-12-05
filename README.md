@@ -37,14 +37,16 @@ Redis stores the visit count so that data persists even after restarting contain
 
 ## 📂 2. Project Structure
 
+\`\`\`
 docker-practice/
-│
 ├── Dockerfile
 ├── docker-compose.yml
 ├── index.js
 ├── package.json
 ├── package-lock.json
 └── README.md
+\`\`\`
+
 
 ---
 
