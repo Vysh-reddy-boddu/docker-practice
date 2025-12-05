@@ -1,15 +1,40 @@
-version: '3'
+version: '3.9'
+
 services:
   redis:
     image: redis:alpine
     volumes:
       - redis-data:/data
+    networks:
+      - app-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
 
   app:
-    build: .
+    image: vyshnaviboddu/node-app:v1
     ports:
       - "3000:3000"
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy
+    environment:
+      - PORT=3000
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    networks:
+      - app-net
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+networks:
+  app-net:
+
 volumes:
   redis-data:
+
