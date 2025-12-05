@@ -47,7 +47,6 @@ docker-practice/
 └── README.md
 \`\`\`
 
-
 ---
 
 ## 🐳 3. Dockerfile Explanation
